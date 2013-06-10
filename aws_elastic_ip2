@@ -1,7 +1,7 @@
 #!/bin/sh
 # chkconfig: 2345 79 6
-# description: Auto associate Elastic IP
-# processname: aws_elastic_ip
+# description: Auto associate Elastic IP 2
+# processname: aws_elastic_ip2
 #
 
 #. /path/to/.ec2env
