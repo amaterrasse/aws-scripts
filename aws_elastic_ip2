@@ -3,7 +3,6 @@
 # description: Auto associate Elastic IP
 # processname: aws_elastic_ip
 #
-ELASTIC_IP_ADDRESS=1.1.1.1
 
 #. /path/to/.ec2env
 export JAVA_HOME=/usr/java/default
@@ -12,7 +11,8 @@ export PATH=${JAVA_HOME}/bin:${EC2_HOME}/bin:${PATH}
 export EC2_PRIVATE_KEY=/path/to/pk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.pem
 export EC2_CERT=/path/to/cert-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.pem
 
-EC2_INSTANCE_ID=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id`
+EC2_INSTANCE_ID=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
+ELASTIC_IP_ADDRESS=`ec2-describe-instances ${EC2_INSTANCE_ID} | grep -e "^TAG	instance	${EC2_INSTANCE_ID}	Elastic IP	" | cut -f5`
 
 # Carry out specific functions when asked to by the system
 case "$1" in
